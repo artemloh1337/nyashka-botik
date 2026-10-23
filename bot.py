@@ -7,7 +7,8 @@ from aiogram.types import Message
 from aiogram.filters import Command
 
 # ================== НАСТРОЙКИ ==================
-BOT_TOKEN = "8987430982:AAFSc3jGgPSvTqL4XBAJQKx9hT2LqpHAdGE"
+import os
+BOT_TOKEN = os.getenv("BOT_TOKEN")
 ADMIN_IDS = {5082771401}          # <-- твой Telegram user_id (@userinfobot)
 DB_PATH = "casino.db"
 START_BALANCE = 1000
