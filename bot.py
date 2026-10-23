@@ -762,10 +762,18 @@ async def finalize_game(game_id: int):
         await bot.send_message(game["chat_id"], "🥰НИЧЬЯШЕЧКА🥰 ВАШИ 💸ДЕНЮЖКИ ВОЗВРАЩЕНЫ💸")
 
 # ================== ЗАПУСК ==================
+from aiohttp import web
+
+async def web_server():
+    app = web.Application()
+    app.router.add_get('/', lambda r: web.Response(text="Bot is alive!"))
+    runner = web.AppRunner(app)
+    await runner.setup()
+    site = web.TCPSite(runner, '0.0.0.0', 8080)
+    await site.start()
+
 async def main():
     await init_db()
+    asyncio.create_task(web_server()) # Запускаем мини-сайт
     print("Бот-няшечка запущен... 🌸")
     await dp.start_polling(bot)
-
-if __name__ == "__main__":
-    asyncio.run(main())
